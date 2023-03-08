@@ -1,0 +1,13 @@
+/* Enable fullscreen mode for mobile Chrome */
+@media (max-width: 767px) {
+    /* The element that you want to make fullscreen */
+    body {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+    }
+  }
+  
