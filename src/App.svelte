@@ -3,7 +3,7 @@
   import QrScanner from "qr-scanner"
   import PocketBase from "pocketbase"
 
-  const pb = new PocketBase("http://127.0.0.1:8090")
+  const pb = new PocketBase(import.meta.env.VITE_DB_URL)
 
   let stream
   let pos
@@ -23,17 +23,16 @@
       stream,
       async (result) => {
         const scanned_data = JSON.parse(result.data)
-        if(scanned_data.id === 'kjbf6klp038o739') {
+        
           qrScanner.stop()
           alert('scanned correctly')
           const data = {
             "package": scanned_data.id,
-            "latitude": pos.lat,
-            "longitude": pos.lng
+            "lat": pos.lat,
+            "lng": pos.lng
           };
           const response = await pb.collection('locations').create(data);
           console.log(response)
-        }
       },
       {
         highlightScanRegion: true,
